@@ -46,8 +46,8 @@ function App() {
         />
         <br />
         <button type="submit">Submit</button>
-        {isClicked && <p>Full Name: {fullName}</p>}
       </form>
+      {isClicked && <p>Full Name: {fullName}</p>}
     </div>
   );
 }
