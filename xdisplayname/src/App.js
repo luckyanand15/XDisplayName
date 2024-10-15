@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 
 function App() {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  const [name,setName] = useState({
+    fname:"",
+    lname:""
+  })
   const [fullName, setFullName] = useState("");
   const [isClicked, setIsClicked] = useState(false);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFullName(fname + " " + lname);
-    setIsClicked(true);
+
+  const inputEvent = (e) => {
+    const {name,value} = e.target;
+    setName((prev)=>{
+      return{
+        ...prev,
+        [name]:value
+      }
+    });
   };
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    setFullName(name.fname+" "+name.lname);
+    setIsClicked(true);
+  }
   return (
     <div>
       <h1>Full Name Display</h1>
@@ -17,16 +30,18 @@ function App() {
         <label>First Name:</label>
         <input
           type="text"
-          value={fname}
-          onChange={(e) => setFname(e.target.value)}
+          name="fname"
+          value={name.fname}
+          onChange={inputEvent}
           required
         />
         <br />
         <label>Last Name:</label>
         <input
           type="text"
-          value={lname}
-          onChange={(e) => setLname(e.target.value)}
+          value={name.lname}
+          name="lname"
+          onChange={inputEvent}
           required
         />
         <br />
